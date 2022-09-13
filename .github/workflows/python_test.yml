@@ -73,7 +73,7 @@ jobs:
       
 
     - name: Check codestyle
-      uses: 'tordf/check_python@v1.0'
+      uses: '.github/actions/check_python@main'
 
     - name: Run tests
       run: |
