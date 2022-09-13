@@ -73,7 +73,7 @@ jobs:
       
 
     - name: Check codestyle
-      uses: '.github/actions/check_python@main'
+      uses: 'hagaltech/common-workflows/.github/actions/check_python@main'
 
     - name: Run tests
       run: |
