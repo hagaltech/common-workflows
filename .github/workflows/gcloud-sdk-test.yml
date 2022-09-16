@@ -14,4 +14,6 @@ jobs:
       with:
         gcp_credentials: ${{ secrets.GCP_SA_KEY }}
       
-    - run: gcloud info
+    - run: |
+        gcloud info
+        docker pull europe-docker.pkg.dev/hybrid-316509/hagal/hello-world:latest
