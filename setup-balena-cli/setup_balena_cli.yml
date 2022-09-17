@@ -1,0 +1,21 @@
+name: "balena cli setup"
+author: "@andreavs"
+description: "An action to setup the balena CLI and login"
+branding:
+  icon: "truck"
+  color: "gray-dark"
+inputs:
+  api_key:
+    description: "Balena API key"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: |
+      curl https://github.com/balena-io/balena-cli/releases/download/v14.3.0/balena-cli-v14.3.0-linux-x64-standalone.zip -L -o balena.zip
+      unzip balena.zip
+      echo "${PWD}/balena-cli" >> $GITHUB_PATH
+      balena login --token ${{ inputs.api_key }}
+    shell: bash
+
+
