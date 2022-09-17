@@ -1,4 +1,4 @@
-name: Reusable google cloud sdk setup test
+name: Reusable balena cli setup test
 
 on:
   pull_request:
