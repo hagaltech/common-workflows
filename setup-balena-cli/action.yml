@@ -19,3 +19,4 @@ runs:
     # needs to be split in two steps so that the PATH is set properly
     - run: | 
         balena login --token ${{ inputs.api_key }}
+      shell: bash
