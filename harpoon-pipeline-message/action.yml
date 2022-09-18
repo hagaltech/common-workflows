@@ -21,7 +21,6 @@ runs:
 
   - name: Send deployment message to harpoon
     run: | 
-      PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
       yq -i '.pipeline.variables.prNumber = env(PR_NUMBER)' ${{ inputs.template_path }}
       gcloud pubsub topics publish harpoon-deploy --message "$(yq ${{ inputs.template_path }} -o=json)" --project=hagal-cicd
     shell: bash
