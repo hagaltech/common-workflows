@@ -16,4 +16,4 @@ jobs:
       
     - run: |
         gcloud info
-        docker pull europe-docker.pkg.dev/hybrid-316509/hagal/hello-world:latest
+        docker pull {{ secrects.DOCKER_REGISTRY }}/hello-world:latest
