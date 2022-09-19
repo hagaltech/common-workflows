@@ -15,4 +15,4 @@ jobs:
         gcp_credentials: ${{ secrets.GCP_SA_KEY }}
       
     - run: |
-        docker pull {{ secrets.DOCKER_REGISTRY }}/hello-world:latest
+        docker pull ${{ secrets.DOCKER_REGISTRY }}/hello-world:latest
