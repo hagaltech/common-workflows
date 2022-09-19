@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2   
     - name: Install dependencies
-      uses: 'hagaltech/common-workflows/setup-gcloud-sdk@add-gcloud-action'
+      uses: 'hagaltech/common-workflows/setup-gcloud-sdk@main'
       with:
         gcp_credentials: ${{ secrets.GCP_SA_KEY }}
       
