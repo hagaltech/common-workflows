@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2   
     - name: Install dependencies
-      uses: 'hagaltech/common-workflows/setup-balena-cli@setup-balena-cli'
+      uses: 'hagaltech/common-workflows/setup-balena-cli@main'
       with:
         api_key: ${{ secrets.BALENA_API_KEY }}
 
