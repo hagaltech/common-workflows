@@ -1,0 +1,29 @@
+name: "Harpoon deployment message"
+author: "@andreavs"
+description: "Action to send a deployment message to harpoon. Depends on having gcloud setup"
+branding:
+  icon: "truck"
+  color: "gray-dark"
+inputs:
+  template_path:
+    description: "The path to the harpoon-pipeline template"
+    required: true
+  cicd_project: 
+    description: "The GCP project id where harpoon is running"
+    required: true
+runs:
+  using: "composite"
+  steps:
+  
+  - name: Get PR number
+    run: echo "PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")" >> $GITHUB_ENV
+    shell: bash
+    
+  - name: Setup yq
+    uses: mikefarah/yq@master
+
+  - name: Send deployment message to harpoon
+    run: | 
+      yq -i '.pipeline.variables.prNumber = env(PR_NUMBER)' ${{ inputs.template_path }}
+      gcloud pubsub topics publish harpoon-deploy --message "$(yq ${{ inputs.template_path }} -o=json)" --project={{ inputs.cicd_project }}
+    shell: bash
