@@ -1,0 +1,18 @@
+name: Reusable google cloud sdk setup test
+
+on:
+  pull_request:
+    branches: [ main ]  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2   
+    - name: Install dependencies
+      uses: 'hagaltech/common-workflows/setup-gcloud-sdk@add-gcloud-action'
+      with:
+        gcp_credentials: ${{ secrets.GCP_SA_KEY }}
+      
+    - run: |
+        docker pull ${{ secrets.DOCKER_REGISTRY }}/hello-world:latest
