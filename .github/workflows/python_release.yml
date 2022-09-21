@@ -73,7 +73,7 @@ jobs:
       
 
     - name: Check codestyle
-      uses: 'hagaltech/common-workflows/.github/actions/check-python@7-use-our-own-setup-gcloud-action-in-reusable-workflows'
+      uses: 'hagaltech/common-workflows/check-python@7-use-our-own-setup-gcloud-action-in-reusable-workflows'
 
     - name: Run tests
       run: |
