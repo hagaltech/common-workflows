@@ -53,13 +53,13 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
-      uses: 'hagaltech/common-workflows/poetry-install@7-use-our-own-setup-gcloud-action-in-reusable-workflows'
+      uses: 'hagaltech/common-workflows/poetry-install@main'
       with:
         poetry-repository: ${{secrets.GCP_ARTIFACT_REGISTRY_PYTHON_URI}}/$PROJECT_ID/${DOCKER_REGISTRY}
       
 
     - name: Check codestyle
-      uses: 'hagaltech/common-workflows/check-python@7-use-our-own-setup-gcloud-action-in-reusable-workflows'
+      uses: 'hagaltech/common-workflows/check-python@main'
 
     - name: Run tests
       run: |
