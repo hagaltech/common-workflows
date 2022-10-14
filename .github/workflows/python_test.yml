@@ -71,8 +71,8 @@ jobs:
 
     - name: Get service name from TOML file
       run: | 
+        dos2unix pyproject.toml
         echo "SERVICE_NAME=$(sed -n -e 's/^.*name\s*=\s* //p' pyproject.toml | tr -d '"')" >> $GITHUB_ENV
-        SERVICE_NAME="${SERVICE_NAME//$'\r'/}" >> $GITHUB_ENV
     
     - name: Get package version from TOML file
       run: echo "VERSION=$(sed -n -e 's/^.*version\s*=\s* //p' pyproject.toml | tr -d '"')" >> $GITHUB_ENV
