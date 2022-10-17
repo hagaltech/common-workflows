@@ -70,7 +70,11 @@ jobs:
       run: echo "HASH=$(echo $GITHUB_SHA | cut -c 1-7)" >> $GITHUB_ENV
 
     - name: Get service name from TOML file
-      run: echo "SERVICE_NAME=$(sed -n -e 's/^.*name\s*=\s* //p' pyproject.toml | tr -d '"')" >> $GITHUB_ENV
+      run: |
+        sudo apt-get update
+        sudo apt-get install dos2unix
+        dos2unix pyproject.toml
+        echo "SERVICE_NAME=$(sed -n -e 's/^.*name\s*=\s* //p' pyproject.toml | tr -d '"')" >> $GITHUB_ENV
     
     - name: Get package version from TOML file
       run: echo "VERSION=$(sed -n -e 's/^.*version\s*=\s* //p' pyproject.toml | tr -d '"')" >> $GITHUB_ENV
