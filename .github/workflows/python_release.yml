@@ -70,16 +70,17 @@ jobs:
       run: echo "HASH=$(echo $GITHUB_SHA | cut -c 1-7)" >> $GITHUB_ENV
 
     - name: Get service name from TOML file
-      run: echo "SERVICE_NAME=$(sed -n -e 's/^.*name\s*=\s* //p' pyproject.toml | tr -d '"')" >> $GITHUB_ENV
+      run: |-
+        sudo apt-get update
+        sudo apt-get install dos2unix
+        dos2unix pyproject.toml
+        echo "SERVICE_NAME=$(sed -n -e 's/^.*name\s*=\s* //p' pyproject.toml | tr -d '"')" >> $GITHUB_ENV
     
     - name: Get package version from TOML file
       run: echo "VERSION=$(sed -n -e 's/^.*version\s*=\s* //p' pyproject.toml | tr -d '"')" >> $GITHUB_ENV
 
     - name: Build docker image
       run: |-
-        sudo apt-get update
-        sudo apt-get install dos2unix
-        dos2unix pyproject.toml
         docker build -f Dockerfile --progress plain --build-arg GOOGLE_APPLICATION_CREDENTIALS=$(echo $SA_KEY | base64 -w 0)  -t $ARTIFACT_REGISTRY/$PROJECT_ID/${DOCKER_REGISTRY}/$SERVICE_NAME:$HASH -t $ARTIFACT_REGISTRY/$PROJECT_ID/${DOCKER_REGISTRY}/$SERVICE_NAME:latest -t $ARTIFACT_REGISTRY/$PROJECT_ID/${DOCKER_REGISTRY}/$SERVICE_NAME:$VERSION .
     
     - name: Push docker image
