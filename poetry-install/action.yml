@@ -16,7 +16,7 @@ runs:
         echo "$path/bin" >>"$GITHUB_PATH"
         export PATH="$path/bin:$PATH"
         python -m pip install --upgrade pip
-        curl -sSL https://install.python-poetry.org | python3 - --git https://github.com/python-poetry/poetry.git@master
+        curl -sSL https://install.python-poetry.org | python3 - --version 1.2.0
         poetry self add poetry-artifactregistry-plugin
         poetry config repositories.google ${{ inputs.poetry-repository }}
         poetry config virtualenvs.create false
