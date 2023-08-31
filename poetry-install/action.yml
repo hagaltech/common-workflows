@@ -8,6 +8,10 @@ inputs:
   poetry-repository:
     description: "The External python repository"
     required: true
+  poetry-version:
+    description: "The version of poetry to use"
+    required: false
+    default: "1.2.0"
 runs:
   using: "composite"
   steps:
@@ -16,7 +20,7 @@ runs:
         echo "$path/bin" >>"$GITHUB_PATH"
         export PATH="$path/bin:$PATH"
         python -m pip install --upgrade pip
-        curl -sSL https://install.python-poetry.org | python3 - --version 1.2.0
+        curl -sSL https://install.python-poetry.org | python3 - --version ${{ inputs.poetry-version }}
         poetry self add poetry-artifactregistry-plugin
         poetry config repositories.google ${{ inputs.poetry-repository }}
         poetry config virtualenvs.create false
