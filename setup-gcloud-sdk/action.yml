@@ -12,12 +12,12 @@ runs:
   using: "composite"
   steps:
     - id: 'auth'
-      uses: 'google-github-actions/auth@v0'
+      uses: 'google-github-actions/auth@v2'
       with:
         credentials_json: '${{ inputs.gcp_credentials }}'
 
     - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v2'
+      uses: 'google-github-actions/setup-gcloud@v0'
 
     - run: |
         gcloud config set artifacts/repository hagal
